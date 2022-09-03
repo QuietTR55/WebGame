@@ -14,14 +14,16 @@ public class EnemySpawner : MonoBehaviour
 
     public bool GameStopped;
 
-    void OnEnable()
+    void Start()
     {
-
+        GameManager.Instance.OnWaveEnd += StopSpawning;
+        GameManager.Instance.OnWaveStart += StartSpawning;
     }
 
     void OnDisable()
     {
-
+        GameManager.Instance.OnWaveEnd -= StopSpawning;
+        GameManager.Instance.OnWaveStart -= StartSpawning;
     }
 
     void Update()

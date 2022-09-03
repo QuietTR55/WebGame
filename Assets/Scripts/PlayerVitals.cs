@@ -47,7 +47,8 @@ public class PlayerVitals : MonoBehaviour, IDamageable
 
     public void UpgradeMaxHealth()
     {
-        var currentPercentage = health / maxHealth;
+        float currentPercentage = health / maxHealth;
+        print(currentPercentage);
         maxHealth += 100;
         health = maxHealth * currentPercentage;
         print($"current health is {health}, max health is{maxHealth}");

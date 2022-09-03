@@ -40,4 +40,10 @@ public class GameManager : MonoBehaviour
     {
         waveEndTime = Time.time + waveLength;
     }
+
+    public void StartWave()
+    {
+        OnWaveStart?.Invoke();
+        gameStopped = false;
+    }
 }

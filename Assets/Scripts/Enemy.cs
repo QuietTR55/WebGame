@@ -1,3 +1,4 @@
+using System.Runtime.Serialization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,12 @@ public class Enemy : MonoBehaviour, IDamageable
     void OnEnable()
     {
         health = MaxHealth;
+        GameManager.Instance.OnWaveEnd += Cancel;
+    }
+
+    void OnDisable()
+    {
+        GameManager.Instance.OnWaveEnd -= Cancel;
     }
 
     void Start()
@@ -34,9 +41,10 @@ public class Enemy : MonoBehaviour, IDamageable
         transform.right = player.transform.position - transform.position;
         Vector2 dir = (player.transform.position - transform.position);
         dir = dir.normalized;
-        rb.AddForce(dir * movementSpeed,ForceMode2D.Force);
-        float distance = Vector2.Distance(transform.position,player.transform.position);
-        if(distance < 2.5f){
+        rb.AddForce(dir * movementSpeed, ForceMode2D.Force);
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+        if (distance < 2.5f)
+        {
             player.Damage(20);
             gameObject.SetActive(false);
         }
@@ -46,5 +54,10 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         gameObject.SetActive(false);
         GameManager.Instance.OnEnemyKilled?.Invoke();
+    }
+
+    private void Cancel()
+    {
+        gameObject.SetActive(false);
     }
 }
