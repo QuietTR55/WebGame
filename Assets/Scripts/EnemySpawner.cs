@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     private float nextSpawnTime;
     private float timeElapsed;
 
-    private bool gameStopped;
+    public bool GameStopped;
 
     void OnEnable()
     {
@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if(gameStopped) return;
+        if(GameStopped) return;
         timeElapsed += Time.deltaTime;
         SpawnInterval -= Time.deltaTime * 0.001f;
         SpawnInterval = Mathf.Clamp(SpawnInterval, 0.1f, 10f);
@@ -54,11 +54,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void StopSpawning()
     {
-        gameStopped = true;
+        GameStopped = true;
     }
 
     private void StartSpawning()
     {
-        gameStopped = false;
+        GameStopped = false;
     }
 }

@@ -45,5 +45,6 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Die()
     {
         gameObject.SetActive(false);
+        GameManager.Instance.OnEnemyKilled?.Invoke();
     }
 }
